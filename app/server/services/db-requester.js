@@ -1,5 +1,10 @@
 'use strict'
 
+/*
+ * Abstract Mongoose DB service object
+ *
+ */
+
 module.exports = {
     getAll: (collection) => {
         return new Promise((resolve, reject) => {
@@ -11,11 +16,9 @@ module.exports = {
             })
         })
     },
-    post: (collection, obj) => {
-        console.log(obj)
-        
+    post: (collection, newObject) => {
         return new Promise((resolve, reject) => {
-            collection.create(obj, (err, data) => {
+            collection.create(newObject, (err, data) => {
                 if (err) {
                     reject(err)
                 }

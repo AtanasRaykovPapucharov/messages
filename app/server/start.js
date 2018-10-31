@@ -1,3 +1,10 @@
+'use strict'
+
+/*
+ * Express server main file
+ *
+ */
+
 module.exports = () => {
     // App Server
     const express = require('express')

@@ -1,5 +1,10 @@
 'use strict'
 
+/*
+ * Mongoose configuration
+ *
+ */
+
 module.exports = (mongoose, connectionString, collections) => {
     mongoose.connect(connectionString, {
         useNewUrlParser: true

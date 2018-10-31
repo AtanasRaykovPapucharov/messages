@@ -1,5 +1,10 @@
 'use strict'
 
+/*
+ * Message mongoose model
+ *
+ */
+
 module.exports.init = mongoose => {
     const Schema = mongoose.Schema
 

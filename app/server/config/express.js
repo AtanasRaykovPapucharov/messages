@@ -1,5 +1,10 @@
 'use strict'
 
+/*
+ * Express Middleware configuration
+ *
+ */
+
 // Build-in Dependencies
 const path = require('path')
 const fs = require('fs')

@@ -1,3 +1,10 @@
+'use strict'
+
+/*
+ * App controller configuration
+ *
+ */
+
 module.exports = (db, collections) => {
     let control = {}
 

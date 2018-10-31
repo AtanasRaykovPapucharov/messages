@@ -1,5 +1,10 @@
 'use strict'
 
+/*
+ * Message data service
+ *
+ */
+
 module.exports = (messages, requester) => {
     return {
         getAll: () => {
