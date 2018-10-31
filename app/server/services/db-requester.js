@@ -42,7 +42,7 @@ module.exports = {
     },
     delete: (collection, id) => {
         return new Promise((resolve, reject) => {
-            collection.findOneAndRemove({
+            collection.findOneAndDelete({
                 _id: id
             }, (err, data) => {
                 if (err) {

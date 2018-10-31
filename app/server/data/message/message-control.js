@@ -13,7 +13,7 @@ module.exports = (messages, Model) => {
           return resp.status(200).json(data)
         })
         .catch(err => {
-          return resp.status(404)
+          return resp.status(400)
         })
     },
     post: (req, resp) => {
@@ -24,7 +24,7 @@ module.exports = (messages, Model) => {
           return resp.status(200).json(data)
         })
         .catch(err => {
-          return resp.status(404)
+          return resp.status(400)
         })
     },
     delete: (req, resp) => {
@@ -33,18 +33,19 @@ module.exports = (messages, Model) => {
           return resp.status(200).json(data)
         })
         .catch(err => {
-          return resp.status(404)
+          return resp.status(400)
         })
     },
     update: (req, resp) => {
-      let updateObj = JSON.parse(req.body.updateObj)
+      const id = req.body.id
+      const updateObj = req.body.updateObj
 
-      return messages.update(req.body.id, updateObj)
+      return messages.update(id, updateObj)
         .then(data => {
           return resp.status(200).json(data)
         })
         .catch(err => {
-          return resp.status(404)
+          return resp.status(400)
         })
     }
   }
