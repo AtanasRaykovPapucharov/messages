@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
+import { BrowserRouter, Route, Redirect, Link, Switch } from 'react-router-dom'
 import Message from './components/Message/Message'
+import AddForm from './components/AddForm/AddForm'
 import './App.css'
-
-const AddButton = () => {
-  return (<button>Add New Message</button>)
-}
 
 class App extends Component {
   constructor() {
@@ -52,16 +50,24 @@ class App extends Component {
 
 
   render() {
-    const renderMessages = this.state.messages.map(msg => <Message key={msg._id} name={msg.author} message={msg.content} />)
+    const renderMessages = () => {
+      return this.state.messages.map(msg => <Message key={msg._id} name={msg.author} message={msg.content} />)
+    }
+    
     return (
-      <div className="App">
-        <header>
-          < AddButton />
-        </header>
-        <main>
-          {renderMessages}
-        </main>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <header>
+            <Link to="all">All Messages</Link>
+            <Link to="new">AddNewMessage</Link>
+          </header>
+          <Switch>
+            <Redirect exact from="/" to="/all" />
+            <Route path="/all" component={renderMessages} />
+            <Route path="/new" component={AddForm} />
+          </Switch>
+        </div>
+      </BrowserRouter>
     )
   }
 }
