@@ -1,33 +1,66 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
+import Message from './components/Message/Message'
 import './App.css'
 
-const Temp = props => {
-  console.log('render Temp')
-  return (<div>{props.val}</div>)
+const AddButton = () => {
+  return (<button>Add New Message</button>)
 }
 
-class App extends PureComponent {
+class App extends Component {
+  constructor() {
+    super()
+    this._url = 'http://localhost:3333/api/message'
+  }
+
   state = {
-    val: 1
+    messages: []
   }
 
   componentDidMount() {
-    setInterval(() => {
-      this.setState({val: this.state.val + 1})
-    }, 2000)
+    this.getAllMessages()
+          .then(messages => {
+            let newState = this.state
+            newState.messages = messages
+            this.setState(newState)
+          })
+          .catch(err => {
+            throw new Error()
+          })
   }
 
-  shouldComponentUpdate(nextProp, nextState) {
-    console.log('nextState', nextState)
-    console.log('currentState', this.state)
-    return ( this.state.val === nextState.val ? false :true)
+  getAllMessages() {
+    return fetch(this._url)
+            .then(data => {
+              return data.json()
+            })
+            .catch(err => {
+              throw new Error()
+            })
   }
+
+  postNewMessage () {
+
+  }
+
+  updateMessage () {
+    
+  }
+
+  deleteMessage () {
+    
+  }
+
 
   render() {
-    console.log('render App')
+    const renderMessages = this.state.messages.map(msg => <Message key={msg._id} name={msg.author} message={msg.content} />)
     return (
       <div className="App">
-          <Temp val={this.state.val} />
+        <header>
+          < AddButton />
+        </header>
+        <main>
+          {renderMessages}
+        </main>
       </div>
     )
   }

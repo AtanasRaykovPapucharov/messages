@@ -1,5 +1,10 @@
 'use strict'
 
+/*
+ * Environment mode parameters
+ *
+ */
+
 const constants = require('../private.json')
 
 module.exports = {
