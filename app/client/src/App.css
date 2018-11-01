@@ -18,7 +18,7 @@ body {
 }
 
 .App-link {
-  color: white;
+  color: #fff;
   margin: 10px;
   text-decoration: none;
   font-size: 1.4em;
@@ -41,7 +41,7 @@ body {
   padding: 5px;
   color: rgb(39, 37, 37);
   background-color: rgb(120, 119, 119);
-  font-size: 1.4em;
+  font-size: 1.6em;
 }
 
 .App-btn {
@@ -49,8 +49,16 @@ body {
   width: 80px;
   height: 30px;
   margin: 5px;
-  color: white;
-  background-color: rgb(202, 134, 146);
+  color: #fff;
+  background-color: rgb(193, 122, 135);
   border-radius: 5px;
   font-size: 0.8em;
+  border-top-color: rgb(187, 180, 180);
+  border-left-color: rgb(187, 180, 180);
+}
+
+.App-btn:hover {
+  background-color: rgb(202, 124, 140);
+  border-top-color: #fff;
+  border-left-color: #fff;
 }

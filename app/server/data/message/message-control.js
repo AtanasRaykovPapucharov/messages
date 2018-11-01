@@ -19,6 +19,8 @@ module.exports = (messages, Model) => {
     post: (req, resp) => {
       let newModel = new Model(req.body)
 
+      console.log(req.body)
+
       return messages.post(newModel)
         .then(data => {
           return resp.status(200).json(data)

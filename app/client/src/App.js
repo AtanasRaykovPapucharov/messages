@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Redirect, Link, Switch } from 'react-router-dom'
+import { BrowserRouter, Switch, Redirect, Route, Link } from 'react-router-dom'
+
 import Message from './components/Message/Message'
 import AddForm from './components/AddForm/AddForm'
-import {API_URL} from './services/Constants'
+
+import { API_URL } from './services/constants'
+import Requester from './services/requester'
+
 import './App.css'
 
 class App extends Component {
@@ -11,25 +15,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getAllMessages()
-          .then(messages => {
-            let newState = this.state
-            newState.messages = messages
-            this.setState(newState)
-          })
-          .catch(err => {
-            throw new Error()
-          })
-  }
+    Requester()
+      .getAll(API_URL)
+      .then(data => {
+        return data.json()
+      })
+      .then(messages => {
+        let newState = this.state
 
-  getAllMessages() {
-    return fetch(API_URL)
-            .then(data => {
-              return data.json()
-            })
-            .catch(err => {
-              throw new Error()
-            })
+        newState.messages = messages
+        this.setState(newState)
+      })
+      .catch(err => {
+        throw new Error(err)
+      })
   }
 
   render() {

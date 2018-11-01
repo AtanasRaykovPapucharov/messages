@@ -1,18 +1,43 @@
 import React, { Component } from 'react'
-import {Redirect} from 'react-router-dom';
+import {API_URL} from '../../services/constants'
+import Requester from '../../services/requester'
+
 class AddForm extends Component {
+
+  sendAndRedirect (e) {
+    e.preventDefault()
+
+    const postForm = new FormData(e.target)
+    const NewMsg = {
+      author: postForm.get('author'),
+      content: postForm.get('content')
+    }
+
+    Requester()
+      .post(API_URL, NewMsg)
+      .then(data => {
+        if(data.status === 200) {
+          alert('New Message saved!')
+          this.props.history.push('/')
+          document.location.reload()
+        }
+      })
+      .catch(err => {
+        throw new Error(err)
+      })
+  }
+
   render() {
-    let redirect = () => (<Redirect from="/new" to="/all"/>)
     return (
-      <form className="App-form" method="POST" action="http://localhost:3333/api/message">
+      <form onSubmit={this.sendAndRedirect.bind(this)} className="App-form"> 
         <h2>New Message</h2>
         <label htmlFor="author">from </label>
         <input type="text" name="author"/>
         <br />
         <br />
-        <textarea name="content" cols="30" rows="10" />
+        <textarea name="content" cols="30" rows="10"/>
         <br />
-        <input onClick={redirect} className="App-btn" type="submit" value="Submit" />
+        <input className="App-btn" type="submit" value="Submit"/>
         <hr />
       </form>
     )
