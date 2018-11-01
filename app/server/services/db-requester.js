@@ -16,6 +16,16 @@ module.exports = {
             })
         })
     },
+    getById: (collection, id) => {
+        return new Promise((resolve, reject) => {
+            collection.find({ _id: id }, (err, data) => {
+                if (err) {
+                    reject(err)
+                }
+                resolve(data)
+            })
+        })
+    },
     post: (collection, newObject) => {
         return new Promise((resolve, reject) => {
             collection.create(newObject, (err, data) => {

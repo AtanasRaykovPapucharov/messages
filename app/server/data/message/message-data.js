@@ -10,6 +10,9 @@ module.exports = (messages, requester) => {
         getAll: () => {
             return requester.getAll(messages)
         },
+        getById: (id) => {
+            return requester.getAll(messages, id)
+        },
         post: (newMsg) => {
             return requester.post(messages, newMsg)
         },

@@ -15,8 +15,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Requester()
-      .getAll(API_URL)
+    Requester().getAll(API_URL)
       .then(data => {
         return data.json()
       })

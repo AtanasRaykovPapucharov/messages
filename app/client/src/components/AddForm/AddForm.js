@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {API_URL} from '../../services/constants'
+import { API_URL } from '../../services/constants'
 import Requester from '../../services/requester'
 
 class AddForm extends Component {
@@ -13,10 +13,9 @@ class AddForm extends Component {
       content: postForm.get('content')
     }
 
-    Requester()
-      .post(API_URL, NewMsg)
-      .then(data => {
-        if(data.status === 200) {
+    Requester().post(API_URL, NewMsg)
+      .then(response => {
+        if(response.status === 200) {
           alert('New Message saved!')
           this.props.history.push('/')
           document.location.reload()
@@ -32,10 +31,10 @@ class AddForm extends Component {
       <form onSubmit={this.sendAndRedirect.bind(this)} className="App-form"> 
         <h2>New Message</h2>
         <label htmlFor="author">from </label>
-        <input type="text" name="author"/>
+        <input type="text" name="author" required/>
         <br />
         <br />
-        <textarea name="content" cols="30" rows="10"/>
+        <textarea name="content" cols="30" rows="10" required/>
         <br />
         <input className="App-btn" type="submit" value="Submit"/>
         <hr />

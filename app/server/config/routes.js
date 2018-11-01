@@ -23,6 +23,7 @@ module.exports = (router, controller, collections) => {
     // all collections routes
     collections.forEach(element => {
         router.get(`/api/${element}`, controller[element].getAll)
+        router.get(`/api/${element}/:id`, controller[element].getById)
         router.post(`/api/${element}`, controller[element].post)
         router.put(`/api/${element}`, controller[element].update)
         router.delete(`/api/${element}`, controller[element].delete)

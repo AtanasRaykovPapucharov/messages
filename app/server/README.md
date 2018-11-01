@@ -6,6 +6,11 @@
   * **POST**
     * post new message
   * **PUT**
-    * update a message with current ID
+    * update a message with current id
   * **DELETE**
-    * delete a message with current ID
+    * delete a message with current id
+
+* `api/message/:id`
+  * **GET**
+    * returns a message with current id
+    

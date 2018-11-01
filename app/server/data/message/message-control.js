@@ -16,6 +16,15 @@ module.exports = (messages, Model) => {
           return resp.status(400)
         })
     },
+    getById: (req, resp) => {
+      return messages.getById(req.params.id)
+        .then(data => {
+          return resp.status(200).json(data)
+        })
+        .catch(err => {
+          return resp.status(400)
+        })
+    },
     post: (req, resp) => {
       let newModel = new Model(req.body)
 

@@ -3,6 +3,9 @@ const requester = () => {
         getAll: (url) => {
             return fetch(url)
         },
+        getById: (url, id) => {
+            return fetch(`${url}/:${id}`)
+        },
         post: (url, obj) => {
             return fetch(url, {
                 method: 'POST',
