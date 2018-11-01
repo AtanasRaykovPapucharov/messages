@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {API_URL} from '../../services/constants'
 import Requester from '../../services/requester'
+import { API_URL, DELETE_QUESTION, DELETE_SELECTOR, EDIT_SELECTOR, DELETE_ALERT, EDIT_ALERT } from '../../services/constants'
 
 class Message extends Component {
   state = {
@@ -11,7 +11,7 @@ class Message extends Component {
   editMsg() {
     return e => {
       // Check if Edit button is clicked
-      if(e.target.className.includes('edit')) {
+      if(e.target.className.includes(EDIT_SELECTOR)) {
         console.log('Editing message with id: ' + this.props.id)
 
         const updateObject = {}
@@ -29,7 +29,7 @@ class Message extends Component {
           .then(response => {
             if(response.status === 200) {
               document.location.reload()
-              alert('Message edited!')
+              alert(EDIT_ALERT)
             }
           })
           .catch(err => {
@@ -42,16 +42,16 @@ class Message extends Component {
   deleteMsg() {
     return e => {
       // Check if Delete button is clicked
-      if(e.target.className.includes('delete')) {
+      if(e.target.className.includes(DELETE_SELECTOR)) {
         console.log('Deleting message with id: ' + this.props.id)
 
         // DOM API window.confirm
-        if (window.confirm('This message is going to be deleted.\nAre you sure?')) {
+        if (window.confirm(DELETE_QUESTION)) {
           Requester().delete(API_URL, this.props.id)
             .then(response => {
               if(response.status === 200) {
                 document.location.reload()
-                console.log('Message deleted!')
+                console.log(DELETE_ALERT)
               }
             })
             .catch(err => {

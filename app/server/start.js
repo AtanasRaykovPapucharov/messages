@@ -35,4 +35,6 @@ module.exports = () => {
     server.listen(port, () => {
         console.log(`Server is running on port ${port}`)
     })
+
+    return server
 }

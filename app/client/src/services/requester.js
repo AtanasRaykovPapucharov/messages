@@ -1,3 +1,5 @@
+import { TYPE_JSON } from './constants'
+
 const requester = () => {
     return {
         getAll: (url) => {
@@ -11,7 +13,7 @@ const requester = () => {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': TYPE_JSON
                 }
             })
         },
@@ -22,7 +24,7 @@ const requester = () => {
                     id
                 }),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': TYPE_JSON
                 }
             })
         },
@@ -34,7 +36,7 @@ const requester = () => {
                     updateObj
                 }),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': TYPE_JSON
                 }
             })
         }

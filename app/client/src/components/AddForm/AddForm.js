@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { API_URL } from '../../services/constants'
 import Requester from '../../services/requester'
+import { API_URL, SAVE_ALERT } from '../../services/constants'
 
 class AddForm extends Component {
 
@@ -16,7 +16,7 @@ class AddForm extends Component {
     Requester().post(API_URL, NewMsg)
       .then(response => {
         if(response.status === 200) {
-          alert('New Message saved!')
+          alert(SAVE_ALERT)
           this.props.history.push('/')
           document.location.reload()
         }

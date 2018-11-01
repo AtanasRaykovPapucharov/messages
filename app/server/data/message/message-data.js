@@ -11,7 +11,7 @@ module.exports = (messages, requester) => {
             return requester.getAll(messages)
         },
         getById: (id) => {
-            return requester.getAll(messages, id)
+            return requester.getById(messages, id)
         },
         post: (newMsg) => {
             return requester.post(messages, newMsg)

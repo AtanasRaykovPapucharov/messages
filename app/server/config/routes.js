@@ -16,11 +16,16 @@ module.exports = (router, controller, collections) => {
 
     // root route
     router.get('/', (req, resp) => {
+        resp.redirect('/api')
+    })
+
+    // api route
+    router.get('/api', (req, resp) => {
         console.log('API User connected!')
         resp.status(200).json(rootResponseObject)
     })
 
-    // all collections routes
+    // all existed routes
     collections.forEach(element => {
         router.get(`/api/${element}`, controller[element].getAll)
         router.get(`/api/${element}/:id`, controller[element].getById)
@@ -29,8 +34,8 @@ module.exports = (router, controller, collections) => {
         router.delete(`/api/${element}`, controller[element].delete)
     })
 
-    // all not existing routes
+    // all not existed routes
     router.get('*', (req, resp) => {
-        resp.redirect('/')
+        resp.status(404)
     })
 }
