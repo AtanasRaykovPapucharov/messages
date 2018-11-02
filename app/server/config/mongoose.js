@@ -5,8 +5,8 @@
  *
  */
 
-module.exports = (mongoose, connectionString, collections) => {
-    mongoose.connect(connectionString, {
+module.exports = (mongoose, mongo, collections) => {
+    mongoose.connect(mongo, {
         useNewUrlParser: true
     })
 

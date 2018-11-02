@@ -2,6 +2,7 @@ const request = require('superagent')
 const URL = 'http://localhost:3333/api/message'
 
 module.exports = (expect) => {
+
     describe('ajax request integration tests', () => {
         describe('GET /api/message', () => {
             it('responds with status 200', done => {

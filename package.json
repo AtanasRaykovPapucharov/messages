@@ -5,7 +5,7 @@
   "main": "startup.js",
   "author": "AtanasRaykovPapucharov",
   "scripts": {
-    "coverage": "cd coverage",
+    "coverage": "cd coverage && index.html",
     "postinstall": "cd app/client && npm i",
     "react": "cd app/client && npm start",
     "start": "nodemon index.js",
@@ -23,7 +23,6 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
-    "mongo-mock": "^3.3.2",
     "nodemon": "^1.18.4",
     "nyc": "^13.1.0",
     "sinon": "^7.1.1",

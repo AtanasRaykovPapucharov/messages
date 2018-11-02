@@ -1,9 +1,18 @@
 const sinon = require('sinon')
 const requester = require('../../../app/server/services/db-requester')
+const mongoMock = () => {
+    return {
+        create: () => {},
+        find: () => {},
+        findOne: () => {},
+        findOneAndUpdate: () => {},
+        findOneAndDelete: () => {}
+    }
+}
 
-module.exports = (expect) => {
-    describe('DB requester service tests', () => {
-        it('returns object with the right methods', done => {
+module.exports = (expect, assert) => {
+    describe('DB Requester service test', () => {
+        it('should verify tested object returns the right methods', done => {
             const requesterMock = sinon.mock(requester)
 
             requesterMock.expects('getAll').once().throws()
@@ -15,5 +24,6 @@ module.exports = (expect) => {
             requesterMock.verify
             done()
         })
+
     })
 }
