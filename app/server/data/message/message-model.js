@@ -6,24 +6,28 @@
  */
 
 module.exports.init = mongoose => {
-    const Schema = mongoose.Schema
+    try {
+        const Schema = mongoose.Schema
 
-    const message = new Schema({
-        author: {
-            type: String,
-            required: true
-        },
-        content: {
-            type: String,
-            required: true
-        },
-        date: {
-            type: Object,
-            default: new Date()
-        }
-    })
+        const message = new Schema({
+            author: {
+                type: String,
+                required: true
+            },
+            content: {
+                type: String,
+                required: true
+            },
+            date: {
+                type: Object,
+                default: new Date()
+            }
+        })
 
-    const Message = mongoose.model('Message', message)
+        const Message = mongoose.model('Message', message)
 
-    return Message
+        return Message
+    } catch (error) {
+        throw new Error('Message model error' + error)
+    }
 }

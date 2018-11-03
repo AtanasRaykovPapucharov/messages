@@ -5,15 +5,41 @@ module.exports = chai => {
     const expect = chai.expect
 
     describe('MessageControl test', () => {
-        it('should verify tested object returns the right methods', done => {
-            const messageControlMock = sinon.mock(messageControl('collection', {}))
+        let messageControlMock
+        beforeEach(() => {
+            messageControlMock = sinon.mock(messageControl('collection', {}))
+        })
 
+        afterEach(() => {
+            messageControlMock.restore()
+        })
+
+        it('should verify that "getAll" is called', done => {
             messageControlMock.expects('getAll').once().throws()
-            messageControlMock.expects('getById').once().throws()
-            messageControlMock.expects('post').once().throws()
-            messageControlMock.expects('update').once().throws()
-            messageControlMock.expects('delete').once().throws()
+            messageControlMock.verify
+            done()
+        })
 
+        it('should verify that "getById" is called', done => {
+            messageControlMock.expects('getById').once().throws()
+            messageControlMock.verify
+            done()
+        })
+
+        it('should verify that "post" is called', done => {
+            messageControlMock.expects('post').once().throws()
+            messageControlMock.verify
+            done()
+        })
+
+        it('should verify that "update" is called', done => {
+            messageControlMock.expects('update').once().throws()
+            messageControlMock.verify
+            done()
+        })
+
+        it('should verify that "delete" is called', done => {
+            messageControlMock.expects('delete').once().throws()
             messageControlMock.verify
             done()
         })

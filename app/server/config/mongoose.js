@@ -6,19 +6,34 @@
  */
 
 module.exports = (mongoose, mongo) => {
-    mongoose.connect(mongo, {
-        useNewUrlParser: true
-    })
+    let db
 
-    const db = mongoose.connection
+    try {
+        mongoose.connect(mongo, {
+            useNewUrlParser: true
+        })
 
-    db.on('error', console.error.bind(console, 'DB connection error: '))
+        db = mongoose.connection
 
-    db.on('connected', () => {
-        console.log('DB connected!')
-    })
+        db.on('error', err => {
+            throw new Error(err)
+        })
 
-    db.on('disconnected', () => {
-        console.log('DB disconnected!')
-    })
+        db.on('connected', () => {
+            console.log('DB connected!')
+        })
+
+        db.on('disconnected', () => {
+            console.log('DB disconnected!')
+        })
+
+        // For testing purposes
+        return db
+
+    } catch (error) {
+        throw error
+    } finally {
+        // For testing purposes
+        return 'Mongoose config error!'
+    }
 }

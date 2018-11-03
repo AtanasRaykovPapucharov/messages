@@ -6,62 +6,67 @@
  */
 
 module.exports = () => {
-    // App Server
-    const express = require('express')
-    const server = express()
+    try {
 
-    // App Environment Mode
-    const env = process.env.NODE_ENV || 'development'
+        // App Server
+        const express = require('express')
+        const server = express()
 
-    // App Constants
-    const params = require('./config')[env]
+        // App Environment Mode
+        const env = process.env.NODE_ENV || 'development'
 
-    // Express configuration
-    require('./config/express')(server)
+        // App Constants
+        const params = require('./config')[env]
 
-    // Database
-    const mongoose = require('mongoose')
-    const mongoConnection = params.db
-    const collections = ['message']
+        // Express configuration
+        require('./config/express')(server)
 
-    const dbReq = require('./services/db-requester')
+        // Database
+        const mongoose = require('mongoose')
+        const mongoConnection = params.db
+        const collections = ['message']
 
-    // Mongoose configuration
-    require('./config/mongoose')(mongoose, mongoConnection)
+        const dbRequester = require('./services/db-requester')
 
-    // Main data object
-    const db = {}
+        // Mongoose configuration
+        require('./config/mongoose')(mongoose, mongoConnection)
 
-    collections.forEach(element => {
-        const modelPath = `./data/${element}/${element}-model`
-        const dataPath = `./data/${element}/${element}-data`
-        const model = require(modelPath).init(mongoose)
+        // Main data object
+        const db = {}
 
-        db[element] = require(dataPath)(model, dbReq)
-        db[`${element}Model`] = model
-    })
+        collections.forEach(element => {
+            const modelPath = `./data/${element}/${element}-model`
+            const dataPath = `./data/${element}/${element}-data`
+            const model = require(modelPath).init(mongoose)
 
-    // Main controller object
-    const controller = {}
+            db[element] = require(dataPath)(model, dbRequester)
+            db[`${element}Model`] = model
+        })
 
-    collections.forEach(element => {
-        controller[element] = require(`./data/${element}/${element}-control`)(db[element], db[`${element}Model`])
-    })
+        // Main controller object
+        const controller = {}
 
-    // Routing configuration
-    require('./config/routes')(server, controller, collections)
+        collections.forEach(element => {
+            controller[element] = require(`./data/${element}/${element}-control`)(db[element], db[`${element}Model`])
+        })
 
-    // Request listener
-    const port = params.port
+        // Routing configuration
+        require('./config/routes')(server, controller, collections)
 
-    server.listen(port, () => {
-        console.log(`Server is running on port ${port}`)
-    })
+        // Request listener
+        const port = params.port
 
-    // For testing purposes
-    return {
-        server,
-        db,
-        controller
+        server.listen(port, () => {
+            console.log(`Server is running on port ${port}`)
+        })
+
+        // For testing purposes
+        return {
+            server,
+            db,
+            controller
+        }
+    } catch (error) {
+        throw new Error('Server start error: ' + error)
     }
 }

@@ -8,19 +8,39 @@
 module.exports = (messages, requester) => {
     return {
         getAll: () => {
-            return requester.getAll(messages)
+            try {
+                return requester.getAll(messages)
+            } catch (error) {
+                throw new Error('Message date "geAll" error: ' + error)
+            }
         },
         getById: (id) => {
-            return requester.getById(messages, id)
+            try {
+                return requester.getById(messages, id)
+            } catch (error) {
+                throw new Error('Message date "geById" error: ' + error)
+            }
         },
         post: (newMsg) => {
-            return requester.post(messages, newMsg)
+            try {
+                return requester.post(messages, newMsg)
+            } catch (error) {
+                throw new Error('Message date "post" error: ' + error)
+            }
         },
         delete: (id) => {
-            return requester.delete(messages, id)
+            try {
+                return requester.delete(messages, id)
+            } catch (error) {
+                throw new Error('Message date "delete" error: ' + error)
+            }
         },
         update: (id, updateMsg) => {
-            return requester.update(messages, id, updateMsg)
+            try {
+                return requester.update(messages, id, updateMsg)
+            } catch (error) {
+                throw new Error('Message date "update" error: ' + error)
+            }
         }
     }
 }

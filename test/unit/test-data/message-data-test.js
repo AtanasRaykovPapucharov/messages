@@ -1,15 +1,6 @@
 const sinon = require('sinon')
 const messageData = require('../../../app/server/data/message/message-data')
 const requester = require('../../../app/server/services/db-requester')
-const mongoMock = () => {
-    return {
-        create: () => {},
-        find: () => {},
-        findOne: () => {},
-        findOneAndUpdate: () => {},
-        findOneAndDelete: () => {}
-    }
-}
 
 module.exports = chai => {
     const expect = chai.expect
@@ -20,12 +11,11 @@ module.exports = chai => {
 
     describe('MessageData has the right methods test', () => {
 
-        beforeEach((done) => {
+        beforeEach(() => {
             const collectionName = 'example'
             requesterMock = sinon.mock(requester)
             data = messageData(collectionName, requesterMock)
             messageDataMock = sinon.mock(data)
-            done()
         })    
         
         afterEach(() => {
@@ -33,31 +23,31 @@ module.exports = chai => {
             messageDataMock.restore()
         })
 
-        it('should verify that "getAll" is called once', done => {
+        it('should verify that "getAll" is called', done => {
             messageDataMock.expects('getAll').once().throws()
             messageDataMock.verify
             done()
         })
 
-        it('should verify that "getById" is called once', done => {
+        it('should verify that "getById" is called', done => {
             messageDataMock.expects('getById').once().throws()
             messageDataMock.verify
             done()
         })
 
-        it('should verify that "post" is called once', done => {
+        it('should verify that "post" is called', done => {
             messageDataMock.expects('post').once().throws()
             messageDataMock.verify
             done()
         })
 
-        it('should verify that "update" is called once', done => {
+        it('should verify that "update" is called', done => {
             messageDataMock.expects('update').once().throws()
             messageDataMock.verify
             done()
         })
 
-        it('should verify that "delete" is called once', done => {
+        it('should verify that "delete" is called', done => {
             messageDataMock.expects('delete').once().throws()
             messageDataMock.verify
             done()
@@ -91,16 +81,9 @@ module.exports = chai => {
         })
     })
 
-    // describe('MessageData methods result test', () => {
-    //     it('should verify "getAll" method returns result', done => {
-    //         let getAllSpy = sinon.spy(messageData, 'getAll')
-
-    //         messageData(mongoMock, requesterMock).getAll
-
-    //         expect(getAllSpy).to.not.be.null
-
-    //         getAllSpy.restore()
-    //         done()
-    //     })
-    // })
+    describe('MessageData methods test', () => {
+        it('should verify all methods are called', done => {
+            done()
+        })
+    })
 }

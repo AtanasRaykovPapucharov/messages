@@ -25,5 +25,12 @@ module.exports = chai => {
                 done()
             })
         })
+
+        // it('should verify message model is called and throws error', done => {
+        //     const msg = new Message({water: '', smart: ''})
+
+        //     expect(msg).to.eql('Message model error!')
+        //     done()
+        // })
     })
 }

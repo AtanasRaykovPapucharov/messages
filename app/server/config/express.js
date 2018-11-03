@@ -17,32 +17,41 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 
 module.exports = app => {
+	try {
 
-	// Pretty JSON Middleware
-	app.use(pretty({
-		query: 'pretty'
-	}))
+		// Pretty JSON Middleware
+		app.use(pretty({
+			query: 'pretty'
+		}))
 
-	// Write Stream to access.log file
-	const logsFile = path.join(__dirname, '../access.log')
-	const accessLogStream = fs.createWriteStream(logsFile, {
-		flags: 'a'
-	})
+		// Write Stream to access.log file
+		const logsFile = path.join(__dirname, '../access.log')
+		const accessLogStream = fs.createWriteStream(logsFile, {
+			flags: 'a'
+		})
 
-	// Access Logger Middleware
-	app.use(morgan('combined', {
-		stream: accessLogStream
-	}))
+		// Access Logger Middleware
+		app.use(morgan('combined', {
+			stream: accessLogStream
+		}))
 
-	// Security Middleware
-	app.use(helmet())
+		// Security Middleware
+		app.use(helmet())
 
-	// Cross-Origin Resource Sharing Middleware
-	app.use(cors())
+		// Cross-Origin Resource Sharing Middleware
+		app.use(cors())
 
-	// Body Parser Middleware
-	app.use(bodyParser.json())
-	app.use(bodyParser.urlencoded({
-		extended: false
-	}))
+		// Body Parser Middleware
+		app.use(bodyParser.json())
+		app.use(bodyParser.urlencoded({
+			extended: false
+		}))
+
+		return app
+	} catch (error) {
+		throw error
+	} finally {
+		// For testing purposes
+		return 'Express config error!'
+	}
 }
