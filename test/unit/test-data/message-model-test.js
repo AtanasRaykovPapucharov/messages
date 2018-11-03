@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const pathToServerData = '../../../app/server/data'
 const Message = require(`${pathToServerData}/message/message-model`).init(mongoose)
 
-module.exports = (expect) => {
+module.exports = chai => {
+    const expect = chai.expect
 
     describe('MessageModel test', () => {
         it('should validate that message model could not be instanced without required parameters passed', done => {

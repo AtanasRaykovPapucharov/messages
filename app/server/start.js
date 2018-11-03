@@ -21,20 +21,47 @@ module.exports = () => {
 
     // Database
     const mongoose = require('mongoose')
-    const dbConnection = params.db
-    const dbCollections = ['message']
+    const mongoConnection = params.db
+    const collections = ['message']
 
-    const db = require('./config/mongoose')(mongoose, dbConnection, dbCollections)
+    const dbReq = require('./services/db-requester')
 
-    const controller = require('./config/controller')(db, dbCollections)
+    // Mongoose configuration
+    require('./config/mongoose')(mongoose, mongoConnection)
+
+    // Main data object
+    const db = {}
+
+    collections.forEach(element => {
+        const modelPath = `./data/${element}/${element}-model`
+        const dataPath = `./data/${element}/${element}-data`
+        const model = require(modelPath).init(mongoose)
+
+        db[element] = require(dataPath)(model, dbReq)
+        db[`${element}Model`] = model
+    })
+
+    // Main controller object
+    const controller = {}
+
+    collections.forEach(element => {
+        controller[element] = require(`./data/${element}/${element}-control`)(db[element], db[`${element}Model`])
+    })
 
     // Routing configuration
-    require('./config/routes')(server, controller, dbCollections)
+    require('./config/routes')(server, controller, collections)
 
+    // Request listener
     const port = params.port
+
     server.listen(port, () => {
         console.log(`Server is running on port ${port}`)
     })
 
-    return server
+    // For testing purposes
+    return {
+        server,
+        db,
+        controller
+    }
 }

@@ -1,7 +1,8 @@
 const sinon = require('sinon')
 const messageControl = require('../../../app/server/data/message/message-control')
 
-module.exports = (expect) => {
+module.exports = chai => {
+    const expect = chai.expect
 
     describe('MessageControl test', () => {
         it('should verify tested object returns the right methods', done => {

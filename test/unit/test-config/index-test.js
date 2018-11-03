@@ -1,6 +1,7 @@
 const params = require('../../../app/server/config/index')
 
-module.exports = (expect) => {
+module.exports = chai => {
+    const expect = chai.expect
 
     describe('Environment constants test', () => {
         it('should verify environment has "development" mode', done => {
