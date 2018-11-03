@@ -6,6 +6,10 @@ const message = {
     content: 'cat'
 }
 
+const updateObj = {
+    content: 'dog'
+}
+
 module.exports = {
     get: () => {
         return new Promise((resolve, reject) => {
@@ -32,18 +36,18 @@ module.exports = {
         return new Promise((resolve, reject) => {
             request
                 .delete(URL)
-                .send({ _id: id })
+                .send({ id: id })
                 .end((err, res) => {
                     if (err) reject(err)
                     resolve(res)
                 })
         })
     },
-    update: (id, updater) => {
+    put: (id) => {
         return new Promise((resolve, reject) => {
             request
                 .put(URL)
-                .send({ _id: id, updateObj: updater })
+                .send({ id: id, updateObj: updateObj })
                 .end((err, res) => {
                     if (err) reject(err)
                     resolve(res)
