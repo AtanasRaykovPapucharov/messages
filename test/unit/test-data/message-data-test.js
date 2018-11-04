@@ -80,19 +80,4 @@ module.exports = chai => {
             done()
         })
     })
-
-    describe('MessageData methods test', () => {
-        it('should verify getAll method is called', done => {
-            sinon.stub(messageData, 'getAll')
-            messageData.getAll.yields('result')
-
-            let spy = sinon.spy()
-
-            let data = messageData('name', spy).getAll()
-
-            expect(data).to.eql('result')
-            messageData.getAll.restore()
-            done()
-        })
-    })
 }
