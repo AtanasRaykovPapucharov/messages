@@ -7,6 +7,7 @@ body {
 .App {
   height: 100%;
   text-align: center;
+  background-color: rgb(218, 217, 217);
 }
 
 .App-header {

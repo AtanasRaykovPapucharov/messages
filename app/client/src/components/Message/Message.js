@@ -4,8 +4,11 @@ import Requester from '../../services/requester'
 import { API_URL, DELETE_QUESTION, DELETE_SELECTOR, EDIT_SELECTOR, DELETE_ALERT, EDIT_ALERT } from '../../services/constants'
 
 class Message extends Component {
-  state = {
-    messages: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      messages: []
+    }
   }
 
   editMsg() {

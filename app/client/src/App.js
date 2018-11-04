@@ -1,15 +1,17 @@
-import React, { Component, lazy, Suspense } from 'react'
+import React, { Component } from 'react'
 import { BrowserRouter, Switch, Redirect, Route, Link } from 'react-router-dom'
 import { API_URL } from './services/constants'
 import Requester from './services/requester'
 import AddForm from './components/AddForm/AddForm'
+import Message from './components/Message/Message'
 import './App.css'
 
-const Message = lazy(() => import('./components/Message/Message'))
-
 class App extends Component {
-  state = {
-    messages: []
+  constructor(props) {
+    super(props)
+    this.state = {
+      messages: []
+    }
   }
 
   componentDidMount() {
@@ -30,7 +32,7 @@ class App extends Component {
 
   render() {
     const renderMessages = () => {
-      return this.state.messages.map(msg => <Suspense key={msg._id} fallback={<div>Loading...</div>}><Message id={msg._id} name={msg.author} message={msg.content} /></Suspense>)
+      return this.state.messages.map(msg => <Message key={msg._id} id={msg._id} name={msg.author} message={msg.content} />)
     }
 
     return (
