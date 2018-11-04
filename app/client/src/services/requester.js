@@ -1,4 +1,5 @@
 import { TYPE_JSON } from './constants'
+import { fetch } from 'whatwg-fetch'
 
 const requester = () => {
     return {

@@ -26,5 +26,8 @@
     "moduleNameMapper": {
       "\\.(css|less)$": "identity-obj-proxy"
     }
+  },
+  "dependencies": {
+    "whatwg-fetch": "^3.0.0"
   }
 }
