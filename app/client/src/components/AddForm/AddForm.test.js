@@ -7,7 +7,14 @@ configure({ adapter: new Adapter() })
 import { shallow, mount, render } from 'enzyme'
 import AddForm from './AddForm'
 
-test('App component should rendered as expected', () => {
+describe('App component test', () => {
     const component = shallow(<AddForm />)
-    console.log(component)
+
+    it('should rendered as expected', () => {
+        render(component)
+    })
+
+    it('expects find .App-form component', () => {
+        expect(component.find('.App-form'))
+    })
 })

@@ -7,7 +7,14 @@ configure({ adapter: new Adapter() })
 import { shallow, mount, render } from 'enzyme'
 import Message from './Message'
 
-test('App component should rendered as expected', () => {
+describe('App component test', () => {
     const component = shallow(<Message />)
-    console.log(component)
+
+    it('should rendered as expected', () => {
+        render(component)
+    })
+
+    it('expects find .App-message component', () => {
+        expect(component.find('.App-message'))
+    })
 })
